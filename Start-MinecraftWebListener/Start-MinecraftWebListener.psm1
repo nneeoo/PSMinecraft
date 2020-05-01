@@ -66,7 +66,7 @@ function Start-MinecraftWebListener {
       $AmountPaid = $Payment.mc_gross - $Payment.mc_fee -as [float]
 
       #Передать массив таким образом, по неведомой причине не получилось, пришлось делать много отдельных переменных.
-      Receive-MinecraftPayment -i $Payment
+      Receive-MinecraftPayment -i $Payment -MinecraftPath $MinecraftPath
 
       #Отвечаем клиенту 200 OK и закрываем стрим.
       $context.Response.Headers.Add("Content-Type", "text/plain")

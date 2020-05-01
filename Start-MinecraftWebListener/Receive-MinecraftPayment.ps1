@@ -2,7 +2,12 @@ function Receive-MinecraftPayment {
     param (
         [Parameter()]
         [ValidateNotNullOrEmpty()]
-        $i
+        $i,
+
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string[]]
+        $MinecraftPath
     )
     
     class Payment {
@@ -33,7 +38,7 @@ function Receive-MinecraftPayment {
     Write-Host File: $FileName -ForegroundColor Green
     
     #Составляем путь, по которому наш объект будет экспортирован
-    $JsonPath = Join-Path C:\mc.fern\payments\Pending -ChildPath $FileName
+    $JsonPath = Join-Path $MinecraftPath \payments\Pending $FileName
     
     #Экспортируем объект в джисонину
     $Payment | ConvertTo-Json | Out-File $JsonPath
