@@ -13,7 +13,7 @@ function Complete-MinecraftPayment {
     Import-Module (Join-Path $MinecraftPath \config.ps1) -Force
     
     #Находим файл содержащий ник игрока
-    $JsonPath = Join-Path $MinecraftPath \payments\Pending  $Player*
+    $JsonPath = Join-Path $MinecraftPath \payments\Pending  $Player "-"*
     $i = $JsonPath | Get-Item | Where-Object { !$_.PSIsContainer } | Get-Content | ConvertFrom-Json -ErrorVariable Errored
 
     #Если файл был найден, выполняем процедуру зачисления
