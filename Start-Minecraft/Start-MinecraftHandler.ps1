@@ -27,7 +27,9 @@ function Restart-Minecraft {
 
     $ram = ((Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum / 1gb)
     $xmx = "-Xms" + $ram + "G"
-    $global:Process = Start-Process -FilePath  "C:\Program Files (x86)\common files\Oracle\Java\javapath_target_*\java.exe" -ArgumentList "$xmx -server -jar $forge nogui" -Wait -NoNewWindow -PassThru
+
+    $JavaPath = Join-Path -Path $env:JAVA_HOME -ChildPath "bin\java.exe"
+    $global:Process = Start-Process $JavaPath -ArgumentList "$xmx -server -jar $forge nogui" -Wait -NoNewWindow -PassThru
     
 }
 
