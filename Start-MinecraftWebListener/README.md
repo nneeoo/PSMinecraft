@@ -1,6 +1,8 @@
 # PSMinecraft
 
-Репозиторий скриптов для управление сервером Minecraft с помощью Powershell 7.
+## PaypalModule
+
+Аддон для Start-Minecraft для приема платежей через кнопки PayPal.
 
 
 ## Подготовка к использованию

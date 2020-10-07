@@ -16,31 +16,31 @@ Set-Location $MinecraftPath
 
 function Restart-Minecraft {
 
-    Write-host "=============== Starting godlike game server ============"
+    Write-Out "=============== Starting godlike game server ============"
 
     if ($type -eq "Vanilla") {
-        $forge = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -first 1
+        $type = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -First 1
     }
     else {
-        $forge = ((Get-ChildItem | Where-Object Name -Like "forge*").Name | Sort-Object -Descending) | Select-Object -first 1
+        $type = ((Get-ChildItem | Where-Object Name -Like "forge*").Name | Sort-Object -Descending) | Select-Object -First 1
     }
 
     $ram = ((Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum / 1gb)
     $xmx = "-Xms" + $ram + "G"
 
     $JavaPath = Join-Path -Path $env:JAVA_HOME -ChildPath "bin\java.exe"
-    $global:Process = Start-Process $JavaPath -ArgumentList "$xmx -server -jar $forge nogui" -Wait -NoNewWindow -PassThru
+    $global:Process = Start-Process $JavaPath -ArgumentList "$xmx -server -jar $type nogui" -Wait -NoNewWindow -PassThru
     
 }
 
 function Write-MinecraftExitcode {
-    Write-host "Start time:" $global:Process.StartTime
+    Write-Out "Start time:" $global:Process.StartTime
 
-    Write-host "Exit code:" $global:Process.ExitCode
+    Write-Out "Exit code:" $global:Process.ExitCode
     
-    Write-host "Exit time:" $global:Process.ExitTime
+    Write-Out "Exit time:" $global:Process.ExitTime
 
-    Write-host "=============== Stopped godlike game server ============="
+    Write-Out "=============== Stopped godlike game server ============="
 }
 
 function Get-MinecraftExitCode {
