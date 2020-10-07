@@ -1,5 +1,5 @@
 # PSMinecraft
-![headimg](Assets/Head.png "ExampleUsage")
+![headimg](Assets/head.png "ExampleUsage")
 
 The **PSMinecraft** is Powershell 7  management modules for minecraft server.
 
