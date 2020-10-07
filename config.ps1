@@ -6,6 +6,3 @@
 $RegExp = "of player ([^ ]+)"
 #После успешного нахождения по паттерну, нужно отрезать все, кроме ника.
 $RegExpCut = "of player "
-
-#Пароль от rcon, который был задан в server.properties
-$rconPassword = "123"
