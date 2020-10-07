@@ -26,7 +26,7 @@ function Start-Minecraft {
         }
         $MinecraftPort = $MinecraftPort | Select-Object -First 1 -ExpandProperty server-port
 
-        $MinecrafNetFirewallRule = (Get-NetFirewallRule -Name "Minecraft" -ErrorAction SilentlyContinue).DisplayName
+        $MinecrafNetFirewallRule = (Get-NetFirewallRule -DisplayName "Minecraft" -ErrorAction SilentlyContinue).DisplayName
         if ($null -eq $MinecrafNetFirewallRule) {
             New-NetFirewallRule -DisplayName "Minecraft" -Action Allow -Direction Inbound -Enabled True -LocalPort $MinecraftPort -Protocol TCP
         }
