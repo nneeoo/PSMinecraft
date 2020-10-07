@@ -14,5 +14,3 @@ function Approve-MinecraftEULA {
         Write-Output ("Approved agreement on minecraft server EULA in ( " + $MinecraftPath + " ) folder")
     }
 }
-
-Approve-MinecraftEULA
