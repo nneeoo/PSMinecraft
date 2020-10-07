@@ -1,75 +1,38 @@
 # PSMinecraft
+![headimg](Assets/Head.png "ExampleUsage")
 
-Репозиторий скриптов для управление сервером Minecraft с помощью Powershell 7.
-
-
-## Подготовка к использованию
-1. Скачать и установить [Powershell 7](https://github.com/PowerShell/PowerShell/releases)
-
-2. Переместить модули скриптов по пути:
-```
- C:\Program Files\PowerShell\7\Modules\Ruvds\
-```
-
-3. Установить модули 
-```Powershell
-Install-Module "C:\Program Files\PowerShell\7\Modules\Ruvds\Start-Minecraft\Start-Minecraft.psd1"
-
-Install-Module "C:\Program Files\PowerShell\7\Modules\Ruvds\Start-MinecraftWebListener\Start-MinecraftWebListener.psd1"
-```
-
-4. Включить rcon на сервере
+The **PSMinecraft** is Powershell 7  management modules for minecraft server.
 
 
-# Как пользоваться
+## Installation
 
-## Start-Minecraft
+### From Source
 
-Запускает майнкрафт из указанной директории и перезапускает в случае сбоя.
-```Powershell
-Start-Minecraft
-    [-Type] <String>
-    [-MinecraftPath] <String>
-    [-LogFile] <String>
-    [-StartPaymentListener] <bool>
-```
+To manually install the module,
+download the source code and unzip the contents to the directory
+'$env:ProgramFiles\PowerShell\7\Modules'.
 
-## Примеры
-#### Пример 1: Запуск ванильного сервера
-Скрит запустит сервер из файла Server.Jar и будет перезапускать его в случае если Excitcode не равен 0.
-```Powershell
-Start-Minecraft -Type Vanilla -MinecraftPath C:\minecraft\
-````
+## Requirements
 
-#### Пример 2: Запуск сервера Forge
-Сервер запустит сервер c самого нового файла forge.
-```Powershell
-Start-Minecraft -Type Forge -MinecraftPath C:\minecraft\
-````
+* The minimum Windows Management Framework (PowerShell) version required is 7.0.0
+or higher.
 
-#### Пример 3: Запуск сервера Forge с премом платежей
-Сервер запустит сервер c самого нового файла forge.
-```Powershell
-Start-Minecraft -Type Forge -MinecraftPath C:\mc.fern\ -StartPaymentListener
-````
+## List of commands
+The following is a list of commands which are available for you to use once you follow the steps in Installation
 
-## Start-Weblistener
+|Command|Description|
+|-------|-----------|
+|[Approve-MinecraftEULA](/Approve-MinecraftEULA) | Accept minecraft Server EULA in certain directory.|
+|[Start-Minecraft](/Start-Minecraft)  | Handler script. Automatically restarts server, provide alternative logging. |
+|[Register-Minecraft](/Register-Minecraft)  | Another way to add script to schedules tasks. |
+|[Start-MinecraftWebListener](/Start-MinecraftWebListener)  | Addon for Start-Minecraft module. This module is listening for paypal IPN notifications. |
 
-Запускает модуль приема платежей отдельно от сервера.
 
-```Powershell
-Start-Minecraft
-    [-MinecraftPath] <String>
-    [-StopToken] <String>
-```
+## Examples
 
-## Примеры
-#### Пример 1
-Скрипт будет искать файл config.ps1 в указанной папке, а так же создаст папку куда будет складывать проведенные платежи.
-```Powershell
-Start-Minecraft -Type Vanilla -MinecraftPath C:\minecraft\
-````
+You can review the directorier for some general use
+scenarios for all of the resources that are in the module.
 
-## Благодарность
+## Change log
 
-Большое спасибо Tiffi за [mcrcon](https://github.com/Tiiffi/mcrcon), без которого этого скрипта не было бы.
+A full list of changes in each version can be found in the [change log](CHANGELOG.md).

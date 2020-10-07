@@ -16,7 +16,7 @@ Set-Location $MinecraftPath
 
 function Restart-Minecraft {
 
-    Write-Out "=============== Starting godlike game server ============"
+    Write-Output "=============== Starting godlike game server ============"
 
     if ($type -eq "Vanilla") {
         $type = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -First 1
@@ -34,13 +34,13 @@ function Restart-Minecraft {
 }
 
 function Write-MinecraftExitcode {
-    Write-Out "Start time:" $global:Process.StartTime
+    Write-Output "Start time:" $global:Process.StartTime
 
-    Write-Out "Exit code:" $global:Process.ExitCode
+    Write-Output "Exit code:" $global:Process.ExitCode
     
-    Write-Out "Exit time:" $global:Process.ExitTime
+    Write-Output "Exit time:" $global:Process.ExitTime
 
-    Write-Out "=============== Stopped godlike game server ============="
+    Write-Output "=============== Stopped godlike game server ============="
 }
 
 function Get-MinecraftExitCode {
