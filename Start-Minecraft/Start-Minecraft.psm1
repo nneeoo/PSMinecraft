@@ -6,14 +6,10 @@ function Start-Minecraft {
         [string]
         $LogFile,
 
-        [Parameter(Mandatory)]  
         [ValidateSet('Vanilla', 'Forge')]
-        [ValidateNotNullOrEmpty()]
         [string]
         $Type = 'Vanilla',
 
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
         [string]
         $MinecraftPath = "C:\Minecraft\",
 
@@ -38,7 +34,7 @@ function Start-Minecraft {
             Set-NetFirewallRule -DisplayName "Minecraft" -Action Allow -Direction Inbound -Enabled True -LocalPort $MinecraftPort -Protocol TCP
         }
 
-        Get-Content $ServerPropertiesFIle -replace "enable-rcon=false", "enable-rcon=true" | Out-File $ServerPropertiesFIle
+        (Get-Content $ServerPropertiesFIle) -replace "enable-rcon=false", "enable-rcon=true" | Out-File $ServerPropertiesFIle
     }
     process {
         "A", "B" | ForEach-Object -Parallel {
