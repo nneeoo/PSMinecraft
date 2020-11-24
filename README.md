@@ -35,4 +35,4 @@ scenarios for all of the resources that are in the module.
 
 ## Change log
 
-A full list of changes in each version can be found in the [change log](CHANGELOG.md).
+A full list of changes in each version can be found in the [change log](changelog.md).

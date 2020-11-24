@@ -31,7 +31,7 @@ _StartPaymentListener_ run paypal listener for IPN notifications.
 
 ## Examples
 
-#### Example 1: information Output
+#### Example 1:
 Just start minecraft. Latest version forge will be selected automatically, otherwise, start vanilla server.
 
 ``` Powershell
