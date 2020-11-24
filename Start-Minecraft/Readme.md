@@ -38,7 +38,7 @@ Just start minecraft. Latest version forge will be selected automatically, other
 Start-Minecraft
 ````
 
-#### Example 2: information Output
+#### Example 2: start server from forge
 
 Start minecraft from latest version of forge file present in folder.
 
