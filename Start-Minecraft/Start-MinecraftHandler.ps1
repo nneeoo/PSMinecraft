@@ -22,7 +22,15 @@ function Restart-Minecraft {
         $type = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -First 1
     }
     else {
-        $type = ((Get-ChildItem | Where-Object Name -Like "forge*").Name | Sort-Object -Descending) | Select-Object -First 1
+        $Forge = (Get-ChildItem | Where-Object Name -Like "forge*").Name
+
+        if ($null -eq $Forge) {
+            Write-Error "Forge file was not found in foilder"
+            break
+        }
+        else {
+            $type = ((Get-ChildItem | Where-Object Name -Like "forge*").Name | Sort-Object -Descending) | Select-Object -First 1
+        }
     }
 
     $ram = ((Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum / 1gb)
@@ -56,7 +64,9 @@ function Get-MinecraftExitCode {
     } until ($global:Process.ExitCode -eq 0)
 
     #Когда цилк завершен, завершает и листенер
-    Invoke-WebRequest -Method Post -Uri localhost -Body $StopToken | Out-Null
+    if ($StartPaymentListener) {
+        Invoke-WebRequest -Method Post -Uri localhost -Body $StopToken | Out-Null
+    }
 }
 
 Get-MinecraftExitCode

@@ -58,7 +58,7 @@ function Start-Minecraft {
                             Write-Host $_   
                     
                             #Класс Regex сам оповестит нас о срабатывании
-                            if ($true -eq $Regex.Matches($_).Success) {
+                            if ($true -eq $Regex.Matches($_).Success -and $using:StartPaymentListener) {
                                 
                                 #Удаляем все лишне и оставляем только ник игрока
                                 $Player = $Regex.Matches($_).value -replace $RegExpCut
@@ -76,7 +76,7 @@ function Start-Minecraft {
                             Write-Host $_   
                     
                             #Класс Regex сам оповестит нас о срабатывании
-                            if ($true -eq $Regex.Matches($_).Success) {
+                            if ($true -eq $Regex.Matches($_).Succes -and $using:StartPaymentListener) {
                                 
                                 #Удаляем все лишне и оставляем только ник игрока
                                 $Player = $Regex.Matches($_).value -replace $RegExpCut
