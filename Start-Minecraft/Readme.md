@@ -1,7 +1,6 @@
 # Start-Minecraft
 
-The script checks logs and displays statistics and IP addresses of attackers depending on the specified parameters.
-Automatically restart server after crash.
+The script start minecraft, check if minecraft is still running, give items from paypal IPN payments, automatically restart server after crash.
 
 
 ``` Powershell
@@ -33,8 +32,16 @@ _StartPaymentListener_ run paypal listener for IPN notifications.
 ## Examples
 
 #### Example 1: information Output
-Just start minecraft.
+Just start minecraft. Latest version forge will be selected automatically, otherwise, start vanilla server.
 
 ``` Powershell
 Start-Minecraft
+````
+
+#### Example 2: information Output
+
+Start minecraft from latest version of forge file present in folder.
+
+``` Powershell
+Start-Minecraft -type Forge
 ````

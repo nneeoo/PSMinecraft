@@ -18,20 +18,41 @@ function Restart-Minecraft {
 
     Write-Output "=============== Starting godlike game server ============"
 
-    if ($type -eq "Vanilla") {
-        $type = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -First 1
-    }
-    else {
-        $Forge = (Get-ChildItem | Where-Object Name -Like "forge*").Name
+    $RegExp = "\d[\,\.]{1}\d+\.(jar)$"
+    $Regex = [Regex]::new($RegExp)
+    [array]$Files = @()
 
-        if ($null -eq $Forge) {
-            Write-Error "Forge file was not found in foilder"
-            break
+    ((Get-ChildItem | Where-Object Name -Like "forge*").Name | Sort-Object -Descending) | ForEach-Object {
+        if ($Regex.Matches($_).Success) {
+            [array]$Files += $_
         }
-        else {
-            $type = ((Get-ChildItem | Where-Object Name -Like "forge*").Name | Sort-Object -Descending) | Select-Object -First 1
+    } 
+    
+    $Forge = $Files | Select-Object -First 1
+
+    switch ($type) {
+        "Auto" {
+            if ($null -eq $Forge) {
+                $type = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -First 1
+            }
+            else {
+                $type = $Forge
+            }
+        }
+        "Vanilla" {
+            $type = ((Get-ChildItem | Where-Object Name -Like "*server*.jar").Name | Sort-Object -Descending) | Select-Object -First 1
+        }
+        "Forge" {
+            if ($null -eq $Forge) {
+                Write-Error "Forge was not found in foilder" -Category ObjectNotFound
+                break
+            }
+            else {
+                $type = $Forge
+            }
         }
     }
+   
 
     $ram = ((Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum / 1gb)
     $xmx = "-Xms" + $ram + "G"
@@ -42,11 +63,11 @@ function Restart-Minecraft {
 }
 
 function Write-MinecraftExitcode {
-    Write-Output "Start time:" $global:Process.StartTime
+    Write-Output ("Start time: " + $global:Process.StartTime)
 
-    Write-Output "Exit code:" $global:Process.ExitCode
+    Write-Output ("Exit code: " + $global:Process.ExitCode)
     
-    Write-Output "Exit time:" $global:Process.ExitTime
+    Write-Output ("Exit time: " + $global:Process.ExitTime)
 
     Write-Output "=============== Stopped godlike game server ============="
 }

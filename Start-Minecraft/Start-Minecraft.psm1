@@ -6,9 +6,9 @@ function Start-Minecraft {
         [string]
         $LogFile,
 
-        [ValidateSet('Vanilla', 'Forge')]
+        [ValidateSet('Auto' ,'Vanilla', 'Forge')]
         [string]
-        $Type = 'Vanilla',
+        $Type = 'Auto',
 
         [string]
         $MinecraftPath = "C:\Minecraft\",
